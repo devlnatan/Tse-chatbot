@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSE - ChatBot Político</title>
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="styles.css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <main>
+        <div class="card-container">
+            <div id="icon-person">
+                <div class="avatar-container">
+                    <img src="images/person.png" alt="Naru Avatar">
+                    <div class="avatar-glow"></div>
+                </div>
+            </div>
+            <div id="title" class="container-margins">
+                <h1>
+                    Olá, eu sou <span id="person-name">Naru</span>, sua assistente virtual do 
+                    <span id="t">T</span><span id="s">S</span><span id="e">E</span>
+                </h1>
+                <p class="subtitle-description">
+                    Descubra tudo sobre deputados federais de forma simples e rápida! 🏛️
+                </p>
+            </div>
+            <div id="subtitle" class="container-margins">
+                <h2>Como posso te chamar?</h2>
+            </div>
+            <div id="data-question" class="container-margins">
+                <div class="input-container">
+                    <input type="text" placeholder="Digite aqui seu nome" id="name-input" maxlength="14">
+                    <div class="input-focus-line"></div>
+                </div>
+            </div>
+            <div id="button" class="container-margins">
+                <button type="submit" id="prosseguir-button">
+                    <span>Começar Exploração Política</span>
+                    <div class="button-ripple"></div>
+                </button>
+            </div>
+            
+            <div class="features-preview">
+                <h3>O que você vai descobrir:</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <span>Projetos e Propostas</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💰</span>
+                        <span>Gastos Públicos</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🗳️</span>
+                        <span>Histórico de Votações</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏢</span>
+                        <span>Comissões e Cargos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('prosseguir-button').addEventListener('click', function() {
+            var nome = document.getElementById('name-input').value;
+            window.location.href = 'bot-page.html?nome=' + encodeURIComponent(nome);
+        });
+
+        document.getElementById('prosseguir-button').addEventListener('click', function(e) {
+            const ripple = this.querySelector('.button-ripple');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('animate');
+            
+            setTimeout(() => {
+                ripple.classList.remove('animate');
+            }, 600);
+        });
+    </script>
+</body>
+</html>

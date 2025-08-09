@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorador Político - TSE</title>
+    <link rel="stylesheet" type="text/css" href="styles.css/style2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <div id="container-chatbot">
+        <header>
+            <div id="chatbot-image">
+                <div class="avatar-container">
+                    <img src="images/person.png" alt="Naru Chatbot">
+                    <div class="status-indicator"></div>
+                </div>
+            </div>
+            <div id="chatbot-text">
+                <h1 id="loading-text"></h1>
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <p class="chat-subtitle">Seu guia político inteligente 🏛️</p>
+            </div>
+        </header>
+        
+        <main>
+            <div class="search-container">
+                <div class="search-section">
+                    <div class="search-header">
+                        <h2>🔍 Descubra tudo sobre um deputado</h2>
+                        <p>Digite o nome completo para ver informações detalhadas</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="text" id="nomeInput" placeholder="Ex: Nikolas Ferreira">
+                        <button id="buscarButton">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            Explorar
+                        </button>
+                    </div>
+                    
+                    <div class="quick-suggestions">
+                        <p>Sugestões populares:</p>
+                        <div class="suggestions-list">
+                            <button class="suggestion-btn" data-name="Nikolas Ferreira">Nikolas Ferreira</button>
+                            <button class="suggestion-btn" data-name="Arthur Lira">Arthur Lira</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="retorno" class="results-container">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">🏛️</div>
+                        <h3>Bem-vindo ao Explorador Político!</h3>
+                        <p>Descubra informações completas sobre deputados federais:</p>
+                        <ul class="features-list">
+                            <li>📊 Projetos e propostas recentes</li>
+                            <li>💰 Gastos e despesas públicas</li>
+                            <li>🗳️ Histórico de votações</li>
+                            <li>🏢 Comissões e cargos</li>
+                            <li>📈 Estatísticas de desempenho</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div id="img-tse">
+            <img src="images/icon-2.png" id="img-tse-img" alt="TSE Logo">
+        </div>
+    </div>
+
+    <script src="buscaDeputados.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var text = 'Olá, você está conversando com Naru';
+            var index = 0;
+            var loadingElement = document.getElementById('loading-text');
+            var typingIndicator = document.querySelector('.typing-indicator');
+            
+            typingIndicator.style.display = 'flex';
+            
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+                
+                var interval = setInterval(function() {
+                    loadingElement.textContent += text[index];
+                    index++;
+                    if (index === text.length) {
+                        clearInterval(interval);
+                    }
+                }, 60);
+            }, 2000);
+
+            document.querySelectorAll('.suggestion-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const name = this.getAttribute('data-name');
+                    document.getElementById('nomeInput').value = name;
+                    document.getElementById('buscarButton').click();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
